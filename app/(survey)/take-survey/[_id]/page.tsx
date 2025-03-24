@@ -7,7 +7,14 @@ export default function FillSurvey() {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [ data, setData ] = useState([]);
+    interface SurveyData {
+        surveyName?: string;
+        surveyPurpose?: string;
+        showPurpose?: boolean;
+        questions?: { id: string; text: string; type: string; options?: string[] }[];
+    }
+
+    const [data, setData] = useState<SurveyData>({});
 
     const params = useParams();
     const { _id } = params;

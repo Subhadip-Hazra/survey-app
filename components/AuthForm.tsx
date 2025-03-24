@@ -15,7 +15,6 @@ const AuthForm = () => {
     const router = useRouter();
 
     const onSubmit: SubmitHandler<SignInFormInputs> = async (data) => {
-        console.log(data);
         try {
             const res = await fetch('https://survey-app-backend-h4ap.onrender.com/api/users/login', {
                 method: 'POST',
@@ -44,8 +43,8 @@ const AuthForm = () => {
     };
 
     return (
-        <div className="card-border lg:min-w-[566px]">
-            <div className="flex flex-col gap-6 card py-14 px-10">
+        <div className="card-border w-full md:w-[566px]">
+            <div className="flex flex-col gap-6 card md:py-14 py-4 md:px-10 px-2">
                 <h3>Sign In</h3>
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">

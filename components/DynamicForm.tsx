@@ -16,7 +16,7 @@ interface Question {
 }
 
 export default function DynamicForm({ questions }: { questions: Question[] }) {
-    const { handleSubmit, control} = useForm();
+    const { handleSubmit, control, reset} = useForm();
     const { _id } = useParams();
     const router = useRouter();
 
@@ -41,7 +41,8 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
     
             if (response.ok) {
                 toast("Survey Submitted Successfully!");
-                router.push(`/take-survey/${_id}`);
+                reset();
+                router.push(`/`);
             } else {
                 const errorData = await response.json();
                 toast(`Failed to submit survey: ${errorData.error || "Unknown error"}`);
@@ -81,10 +82,10 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
     ];
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {defaultQuestions.map((q) => (
-                <div key={q.id} className="space-y-2 mb-2 border p-4 rounded-lg">
-                    <label className="font-medium my-3">{q.question}</label>
+                <div key={q.id} className="space-y-4 mb-2 border p-4 rounded-lg">
+                    <label className="font-medium mb-3">{q.question}</label>
                     {q.type === "text" && (
                         <Controller
                             name={q.id}
@@ -125,7 +126,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
 
             {/* Dynamic Questions */}
             {questions.map((q, idx) => (
-                <div key={q.id} className="space-y-2 mb-2 border p-4 rounded-lg">
+                <div key={q.id} className="space-y-6 mb-2 border p-4 rounded-lg">
                     <label className="font-medium mb-3">{q.question}</label>
                     {q.type === "text" && (
                         <Controller

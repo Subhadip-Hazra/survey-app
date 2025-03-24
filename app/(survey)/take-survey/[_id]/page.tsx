@@ -30,6 +30,7 @@ export default function FillSurvey() {
                 const data = await res.json();
                 setData(data);
                 setQuestions(data.questions || []);
+
             } catch (err: unknown) {
                 if (err instanceof Error) {
                     setError(err.message);
@@ -48,7 +49,7 @@ export default function FillSurvey() {
     if (error) return <p>{error}</p>;
 
     return (
-        <div className="p-8">
+        <div className="md:p-8">
             <h3 className="text-2xl mb-7">Fill Survey</h3>
             <h1 className="my-1">Survey Name: {data.surveyName || ""}</h1>
             { data.showPurpose && <p className="my-1 mb-6">Purpous: {data.surveyPurpose || ""}</p>}

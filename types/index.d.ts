@@ -71,3 +71,15 @@ interface InterviewFormProps {
 interface TechIconProps {
   techStack: string[];
 }
+
+
+interface Feedback {
+  _id?:string;
+  postedBy: string;
+  profileImg?: string;
+  ratings?: number;
+  feedback?: string;
+  postedDate: Date;
+  isTechnicalIssue?: boolean;
+  topic?: string;
+}

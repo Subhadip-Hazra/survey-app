@@ -99,7 +99,7 @@ export const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = () => {
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div className="p-8">
+        <div className="md:p-8">
             <h1 className="text-2xl mb-4">Update Survey</h1>
 
             {questions.map((q, idx) => (

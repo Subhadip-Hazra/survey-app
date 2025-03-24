@@ -39,8 +39,8 @@ const SurveyResponsesPage = () => {
     };
 
     return (
-        <div className="p-8">
-            <div className='flex flex-row justify-between'>
+        <div className="md:p-8 p-1">
+            <div className='flex flex-col md:flex-row justify-between'>
             <h1 className="text-2xl mb-4">Survey Responses</h1>
             <Button className='btn-primary' onClick={handleDownload}>Export as Excel</Button>
             </div>

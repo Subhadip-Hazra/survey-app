@@ -31,7 +31,7 @@ export default function CreateSurvey() {
     }, []);
 
     const addSurveyDetails = () => {
-        if (!surveyName) return alert("Please enter survey name!");
+        if (!surveyName) return toast("Please enter survey name!");
         setOpenDialog(false);
         const newSurvey: SurveyDetails = {
             surveyName: surveyName,
@@ -80,7 +80,7 @@ export default function CreateSurvey() {
     
 
     return (
-        <div className="p-8">
+        <div className="md:p-8 p-2">
             <Dialog
                 open={openDialog}
                 onOpenChange={(value) => {

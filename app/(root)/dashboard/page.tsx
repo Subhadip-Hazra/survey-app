@@ -18,16 +18,17 @@ interface Survey {
     postedDate: string;
 }
 
+interface UserData {
+    name: string;
+    email: string;
+    god_access:boolean;
+}
+
 const Dashboard = () => {
     const [surveys, setSurveys] = useState<Survey[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [isUser, setIsUser] = useState(false);
     const [userLoading, setUserLoading] = useState(true); // NEW
-    interface UserData {
-        name: string;
-        email: string;
-        god_access:boolean;
-    }
     
     const [userData, setUserData] = useState<UserData | null>(null);
 
@@ -133,18 +134,18 @@ const Dashboard = () => {
             </section>
             <footer>
                 <hr className='min-w-full border text-white'/>
-                <div className='flex flex-row justify-between'>
+                <div className='flex flex-col md:flex-row justify-between'>
 
-                <div className='flex flex-row gap-5 my-4'>
+                <div className='flex flex-row gap-5 mt-2 md:my-4'>
                     {
                         socialLinks.map((social,key) => (
-                            <Link href={social.link} key={key}>
-                                <Image src={social.iconUrl} alt={social.name} width={20} height={20} className='bg-white rounded-full w-16 h-16 border-white border-2'/>
+                            <Link href={social.link} key={key} className="w-10 h-10 rounded-full">
+                                <Image src={social.iconUrl} alt={social.name} width={30} height={30} className='bg-white rounded-full w-10 h-10 border-white border-2'/>
                             </Link>
                         ))
                     }
                 </div>
-                <p className='mt-10'>@2025 all copyrights reserved by Subhadip</p>
+                <p className='md:mt-6 mt-2'>@2025 all copyrights reserved by Subhadip</p>
                 </div>
             </footer>
         </>

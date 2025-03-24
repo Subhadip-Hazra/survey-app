@@ -63,7 +63,7 @@ export default function EditSurveyPage() {
     if (!survey) return <div>Survey not found</div>;
 
     return (
-        <div className="p-8">
+        <div className="md:p-8">
             <h1 className="text-2xl mb-4">Edit Survey</h1>
             <DynamicFormBuilder survey={survey} onSubmit={handleUpdate} />
         </div>

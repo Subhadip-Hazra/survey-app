@@ -31,6 +31,7 @@ const CreateUserForm = () => {
 
     const onSubmit = async (data: UserFormInputs) => {
         setLoading(true);
+        console.log(data);
         try {
             const res = await fetch('https://survey-app-backend-h4ap.onrender.com/api/users/create', {
                 method: 'POST',
@@ -56,8 +57,8 @@ const CreateUserForm = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <Card className="w-full max-w-2xl p-8 shadow-lg">
+        <div className="flex justify-center items-center min-h-screen">
+            <Card className="w-full max-w-2xl md:p-8 p-1 shadow-lg">
                 <CardHeader>
                     <h2 className="text-3xl font-bold text-center mb-6">Create New User</h2>
                 </CardHeader>

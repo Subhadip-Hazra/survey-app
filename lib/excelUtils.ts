@@ -1,7 +1,18 @@
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 
-export const generateExcelData = (data) => {
+interface SurveyAnswer {
+    [key: string]: string | number | boolean | null; // Represents possible types for survey answers
+}
+
+interface SurveyResponse {
+    _id: string;
+    surveyId: string;
+    submittedAt: string | Date;
+    answers: SurveyAnswer;
+}
+
+export const generateExcelData = (data: SurveyResponse[]): ArrayBuffer => {
     // Flattening data
     const flattenedData = data.map((item) => {
         const { _id, surveyId, submittedAt, answers } = item;
@@ -19,7 +30,12 @@ export const generateExcelData = (data) => {
     return XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 };
 
-export const downloadExcelFile = (data, fileName = 'survey_responses.xlsx') => {
+interface DownloadExcelFileOptions {
+    data: SurveyResponse[];
+    fileName?: string;
+}
+
+export const downloadExcelFile = (data: DownloadExcelFileOptions['data'], fileName: DownloadExcelFileOptions['fileName'] = 'survey_responses.xlsx'): void => {
     const excelData = generateExcelData(data);
     const blob = new Blob([excelData], { type: 'application/octet-stream' });
     saveAs(blob, fileName);

@@ -14,7 +14,7 @@ interface SurveyResponse {
         username: string;
         location: string;
         dob: string;
-        [key: string]: any
+        [key: string]: string | number | boolean | null
     };
     submittedAt: string;
 }
@@ -30,7 +30,7 @@ const SurveyResponsesPage = () => {
             fetch(`https://survey-app-backend-h4ap.onrender.com/api/survey-responses/${surveyId}`)
                 .then((res) => res.json())
                 .then((data) => setResponses(data))
-                .catch((error) => console.error('Error fetching survey responses:', error));
+                .catch(() => console.error('Error fetching survey responses:'));
         }
     }, [surveyId]);
 

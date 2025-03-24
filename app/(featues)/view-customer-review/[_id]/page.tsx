@@ -6,7 +6,7 @@ interface SurveyResponse {
     _id: string;
     surveyId: string;
     answers: {
-        [key: string]: any;
+        [key: string]: string | number | boolean | null;
     };
     submittedAt: string;
 }
@@ -22,7 +22,7 @@ const CustomerReviewPage = () => {
             fetch(`https://survey-app-backend-h4ap.onrender.com/api/survey-responses/response/${_id}`)
                 .then((res) => res.json())
                 .then((data) => setResponse(data))
-                .catch((error) => console.error('Error fetching survey response:', error));
+                .catch(() => console.error('Error fetching survey response:'));
         }
     }, [_id]);
 

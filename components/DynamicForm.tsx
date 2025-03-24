@@ -7,12 +7,24 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export default function DynamicForm({ questions }: { questions: any[] }) {
+interface Question {
+    id: string;
+    question: string;
+    type: "text" | "date" | "image" | "pdf" | "options";
+    placeholder?: string;
+    options?: string[];
+}
+
+export default function DynamicForm({ questions }: { questions: Question[] }) {
     const { handleSubmit, control} = useForm();
     const { _id } = useParams();
     const router = useRouter();
 
-    const onSubmit = async (data: any) => {
+    interface FormData {
+        [key: string]: string | File | undefined;
+    }
+
+    const onSubmit = async (data: FormData) => {
         console.log("User Answers:", data);
     
         try {
@@ -35,9 +47,9 @@ export default function DynamicForm({ questions }: { questions: any[] }) {
                 toast(`Failed to submit survey: ${errorData.error || "Unknown error"}`);
                 console.error("Error:", errorData);
             }
-        } catch (error) {
+        } catch {
             toast("Failed to submit survey. Server not reachable.");
-            console.error("Fetch Error:", error);
+            console.error("Fetch Error:");
         }
     };
     
@@ -158,7 +170,7 @@ export default function DynamicForm({ questions }: { questions: any[] }) {
                                         <SelectValue placeholder="Select an option" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {q.options.map((opt: string, id: number) => (
+                                        {(q.options ?? []).map((opt: string, id: number) => (
                                             <SelectItem key={id} value={opt}>{opt}</SelectItem>
                                         ))}
                                     </SelectContent>

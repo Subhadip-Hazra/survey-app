@@ -48,7 +48,7 @@ const CreateUserForm = () => {
             } else {
                 toast.error(result.message || 'Failed to create user');
             }
-        } catch (error) {
+        } catch {
             toast.error('Something went wrong');
         } finally {
             setLoading(false);

@@ -27,7 +27,7 @@ const SurveyResponsesPage = () => {
 
     useEffect(() => {
         if (surveyId) {
-            fetch(`http://localhost:8000/api/survey-responses/${surveyId}`)
+            fetch(`https://survey-app-backend-h4ap.onrender.com/api/survey-responses/${surveyId}`)
                 .then((res) => res.json())
                 .then((data) => setResponses(data))
                 .catch((error) => console.error('Error fetching survey responses:', error));

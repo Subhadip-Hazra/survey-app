@@ -22,7 +22,7 @@ const Page = () => {
     useEffect(() => {
         const fetchSurveys = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/surveys');
+                const response = await fetch('https://survey-app-backend-h4ap.onrender.com/api/surveys');
                 if (!response.ok) {
                     throw new Error('Failed to fetch surveys');
                 }

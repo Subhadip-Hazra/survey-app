@@ -14,7 +14,7 @@ export default function EditSurveyPage() {
     useEffect(() => {
       const fetchSurvey = async () => {
           try {
-              const res = await fetch(`http://localhost:8000/api/surveys/${_id}`);
+              const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`);
               if (!res.ok) {
                   throw new Error("Failed to fetch survey");
               }
@@ -32,7 +32,7 @@ export default function EditSurveyPage() {
 
   const handleUpdate = async (updatedSurveyData) => {
     try {
-        const res = await fetch(`http://localhost:8000/api/surveys/${_id}`, {
+        const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

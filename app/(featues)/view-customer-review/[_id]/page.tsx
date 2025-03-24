@@ -19,7 +19,7 @@ const CustomerReviewPage = () => {
 
     useEffect(() => {
         if (_id) {
-            fetch(`http://localhost:8000/api/survey-responses/response/${_id}`)
+            fetch(`https://survey-app-backend-h4ap.onrender.com/api/survey-responses/response/${_id}`)
                 .then((res) => res.json())
                 .then((data) => setResponse(data))
                 .catch((error) => console.error('Error fetching survey response:', error));

@@ -16,7 +16,7 @@ export default function FillSurvey() {
     useEffect(() => {
         async function fetchSurvey() {
             try {
-                const res = await fetch(`http://localhost:8000/api/surveys/${_id}`);
+                const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`);
                 if (!res.ok) {
                     throw new Error("Survey not found!");
                 }

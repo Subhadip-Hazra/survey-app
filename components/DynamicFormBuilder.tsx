@@ -24,7 +24,7 @@ export default function UpdateSurveyPage() {
     useEffect(() => {
         const fetchSurvey = async () => {
             try {
-                const res = await fetch(`http://localhost:8000/api/surveys/${_id}`);
+                const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`);
                 const data = await res.json();
                 if (data.questions) {
                     setQuestions(data.questions);
@@ -62,7 +62,7 @@ export default function UpdateSurveyPage() {
 
     const handleUpdate = async () => {
         try {
-            const res = await fetch(`http://localhost:8000/api/surveys/${_id}`, {
+            const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ questions }),

@@ -47,7 +47,7 @@ export default function CreateSurvey() {
 
     const handleSave = async (questions: Question[]) => {
         try {
-            const response = await fetch("http://localhost:8000/api/surveys", {
+            const response = await fetch("https://survey-app-backend-h4ap.onrender.com/api/surveys", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

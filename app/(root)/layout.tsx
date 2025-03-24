@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
                 const storedEmail = localStorage.getItem("userEmail");
 
                 if (storedEmail) {
-                    const res = await fetch(`http://localhost:8000/api/users?email=${storedEmail}`);
+                    const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/users?email=${storedEmail}`);
                     const data = await res.json();
 
                     if (data.exists) {

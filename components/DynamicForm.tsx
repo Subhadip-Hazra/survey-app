@@ -16,7 +16,7 @@ export default function DynamicForm({ questions }: { questions: any[] }) {
         console.log("User Answers:", data);
     
         try {
-            const response = await fetch("http://localhost:8000/api/survey-responses", {
+            const response = await fetch("https://survey-app-backend-h4ap.onrender.com/api/survey-responses", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

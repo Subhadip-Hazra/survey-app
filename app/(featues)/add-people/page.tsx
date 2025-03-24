@@ -32,7 +32,7 @@ const CreateUserForm = () => {
     const onSubmit = async (data: UserFormInputs) => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:8000/api/users/create', {
+            const res = await fetch('https://survey-app-backend-h4ap.onrender.com/api/users/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

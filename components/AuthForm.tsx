@@ -1,3 +1,4 @@
+"use client"
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import FormField from '@/components/FormField';

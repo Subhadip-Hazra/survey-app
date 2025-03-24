@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import DynamicFormBuilder from "@/components/DynamicFormBuilder";
+import { DynamicFormBuilder } from "@/components/DynamicFormBuilder";
 import { toast } from "sonner";
+
+  
 
 export default function EditSurveyPage() {
     const { _id } = useParams();
@@ -30,18 +32,9 @@ export default function EditSurveyPage() {
     }, [_id]);
 
 
-    interface Question {
-        id: string;
-        text: string;
-        type: string;
-        options?: string[];
-    }
-
-    interface UpdatedSurveyData {
-        title?: string;
-        description?: string;
-        questions?: Question[];
-    }
+    type UpdatedSurveyData = {
+        [key: string]: string | number | boolean | object | null; // Replace with the actual structure of your survey data
+    };
 
     const handleUpdate = async (updatedSurveyData: UpdatedSurveyData): Promise<void> => {
         try {

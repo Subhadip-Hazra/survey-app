@@ -7,9 +7,23 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { toast } from "sonner";
 import { useParams, useRouter } from "next/navigation";
 
-export default function UpdateSurveyPage() {
-    const { _id } = useParams();
+interface DynamicFormBuilderProps {
+    survey: Survey;
+    onSubmit: (updatedSurveyData: Partial<Survey>) => Promise<void>;
+}
+
+  interface Survey {
+      _id: string;
+      title: string;
+      description: string;
+      questions: Question[];
+    }
+
+
+export const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = () => {
     const router = useRouter();
+    const params = useParams();
+    const { _id } = params;
 
     interface Question {
         id: number;
@@ -39,10 +53,12 @@ export default function UpdateSurveyPage() {
     }, [_id]);
 
     const handleQuestionChange = (index: number, key: keyof Question, value: string) => {
-        const updated: Question[] = [...questions];
-        updated[index][key] = value;
-        setQuestions(updated);
-    };
+            const updated: Question[] = [...questions];
+            if (key === "question" || key === "type") {
+                updated[index][key] = value;
+            }
+            setQuestions(updated);
+        };
 
     const handleOptionChange = (qIdx: number, oIdx: number, value: string) => {
         const updated: Question[] = [...questions];

@@ -12,45 +12,58 @@ export default function EditSurveyPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      const fetchSurvey = async () => {
-          try {
-              const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`);
-              if (!res.ok) {
-                  throw new Error("Failed to fetch survey");
-              }
-              const data = await res.json();
-              setSurvey(data);
-          } catch (err) {
-              console.error("Error fetching survey:", err);
-          } finally {
-              setLoading(false);
-          }
-      };
-      fetchSurvey();
-  }, [_id]);
-  
+        const fetchSurvey = async () => {
+            try {
+                const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch survey");
+                }
+                const data = await res.json();
+                setSurvey(data);
+            } catch (err) {
+                console.error("Error fetching survey:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSurvey();
+    }, [_id]);
 
-  const handleUpdate = async (updatedSurveyData) => {
-    try {
-        const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedSurveyData),
-        });
 
-        if (!res.ok) {
-            throw new Error("Failed to update survey");
-        }
-
-        toast("Survey updated successfully!");
-        router.push("/"); // Redirect
-    } catch (err) {
-        console.error("Error updating survey:", err);
-        toast("Failed to update survey");
+    interface Question {
+        id: string;
+        text: string;
+        type: string;
+        options?: string[];
     }
-};
+
+    interface UpdatedSurveyData {
+        title?: string;
+        description?: string;
+        questions?: Question[];
+    }
+
+    const handleUpdate = async (updatedSurveyData: UpdatedSurveyData): Promise<void> => {
+        try {
+            const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/surveys/${_id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedSurveyData),
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to update survey");
+            }
+
+            toast("Survey updated successfully!");
+            router.push("/"); // Redirect
+        } catch (err) {
+            console.error("Error updating survey:", err);
+            toast("Failed to update survey");
+        }
+    };
 
 
     if (loading) return <div>Loading...</div>;

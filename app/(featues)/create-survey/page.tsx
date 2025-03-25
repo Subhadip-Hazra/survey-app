@@ -35,30 +35,29 @@ export default function CreateSurvey() {
     const [userData, setUserData] = useState<UserData | null>(null);
     
     useEffect(() => {
-        checkUser();
-    },[]);
-    const checkUser = async () => {
-        try {
-            const storedEmail = localStorage.getItem("userEmail");
-
-            if (storedEmail) {
-                const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/users?email=${storedEmail}`);
-                const data = await res.json();
-
-                if (data.exists) {
-                    setUserData(data.data);
+        const checkUser = async () => {
+            try {
+                const storedEmail = localStorage.getItem("userEmail");
+    
+                if (storedEmail) {
+                    const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/users?email=${storedEmail}`);
+                    const data = await res.json();
+    
+                    if (data.exists) {
+                        setUserData(data.data);
+                    } else {
+                        router.push("/sign-up");
+                    }
                 } else {
                     router.push("/sign-up");
                 }
-            } else {
+            } catch (error) {
+                console.error("Error checking user:", error);
                 router.push("/sign-up");
             }
-        } catch (error) {
-            console.error("Error checking user:", error);
-            router.push("/sign-up");
-        } finally {
-        }
-    };
+        };
+        checkUser();
+    },[router]);
 
     // Open modal on page load
     useEffect(() => {

@@ -28,7 +28,6 @@ interface UserData {
 const Dashboard = () => {
     const [surveys, setSurveys] = useState<Survey[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [isUser, setIsUser] = useState(false);
     const [userLoading, setUserLoading] = useState(true);
     const router = useRouter();
     const [userData, setUserData] = useState<UserData | null>(null);
@@ -63,18 +62,14 @@ const Dashboard = () => {
 
                     if (data.exists) {
                         setUserData(data.data);
-                        setIsUser(true);
                     } else {
-                        setIsUser(false);
                         router.push("/sign-up");
                     }
                 } else {
-                    setIsUser(false);
                     router.push("/sign-up");
                 }
             } catch (error) {
                 console.error("Error checking user:", error);
-                setIsUser(false);
                 router.push("/sign-up");
             } finally {
                 setUserLoading(false);

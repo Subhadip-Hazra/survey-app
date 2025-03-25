@@ -13,9 +13,17 @@ interface SurveyDetails {
     surveyName : string | "";
     surveyPurpose?:string | "";
     showPurpose?:boolean | false;
-    postedBy:string | "annonymous";
+    postedBy:string | "annonymous@gmail.com";
     postedDate:Date;
+    postedName : string | "annonymous";
 }
+
+interface UserData {
+    name: string;
+    email: string;
+    god_access: boolean;
+}
+
 
 export default function CreateSurvey() {
     const router = useRouter();
@@ -24,6 +32,33 @@ export default function CreateSurvey() {
     const [surveyPurpose, setSurveyPurpose] = useState("");
     const [showPurpose, setShowPurpose] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
+    const [userData, setUserData] = useState<UserData | null>(null);
+    
+    useEffect(() => {
+        checkUser();
+    },[]);
+    const checkUser = async () => {
+        try {
+            const storedEmail = localStorage.getItem("userEmail");
+
+            if (storedEmail) {
+                const res = await fetch(`https://survey-app-backend-h4ap.onrender.com/api/users?email=${storedEmail}`);
+                const data = await res.json();
+
+                if (data.exists) {
+                    setUserData(data.data);
+                } else {
+                    router.push("/sign-up");
+                }
+            } else {
+                router.push("/sign-up");
+            }
+        } catch (error) {
+            console.error("Error checking user:", error);
+            router.push("/sign-up");
+        } finally {
+        }
+    };
 
     // Open modal on page load
     useEffect(() => {
@@ -37,8 +72,9 @@ export default function CreateSurvey() {
             surveyName: surveyName,
             surveyPurpose:surveyPurpose,
             showPurpose:showPurpose,
-            postedBy:"annomyous",
-            postedDate: new Date()
+            postedBy:userData?.email || "annomyous@gmail.com",
+            postedName:userData?.name || "annonymous",
+            postedDate: new Date(),
             // TODO:Add user
         }
         setSaveSurveyDetails(newSurvey);
@@ -56,7 +92,8 @@ export default function CreateSurvey() {
                     surveyName: saveSurveyDetails?.surveyName,
                     surveyPurpose: saveSurveyDetails?.surveyPurpose,
                     showPurpose: saveSurveyDetails?.showPurpose,
-                    postedBy:saveSurveyDetails?.postedBy,
+                    postedBy:userData?.email,
+                    postedName:userData?.name,
                     postedDate:saveSurveyDetails?.postedDate,
                     questions: questions.map((q) => ({
                         id: q.id,

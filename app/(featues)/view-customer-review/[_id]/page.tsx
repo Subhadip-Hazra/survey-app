@@ -14,7 +14,6 @@ interface SurveyResponse {
 const CustomerReviewPage = () => {
     const params = useParams();
     const { _id } = params;
-    console.log(_id);
     const [response, setResponse] = useState<SurveyResponse | null>(null);
 
     useEffect(() => {
@@ -27,7 +26,6 @@ const CustomerReviewPage = () => {
     }, [_id]);
 
     if (!response) {
-        console.log(response);
         return <p>Loading...</p>;
     }
 

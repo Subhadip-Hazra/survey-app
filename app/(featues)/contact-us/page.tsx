@@ -65,8 +65,6 @@ const ContactUsPage = () => {
   };
   
 
-  console.log(feedbacks);
-
   // Fetch User Details
   const checkUser = async () => {
     try {
@@ -116,9 +114,6 @@ const ContactUsPage = () => {
       if (!res.ok) {
         throw new Error("Failed to submit feedback");
       }
-  
-      const resData = await res.json();
-      console.log("New feedback added response:", resData);
   
       // Re-fetch all feedbacks
       await fetchFeedbacks();

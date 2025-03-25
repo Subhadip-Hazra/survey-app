@@ -42,18 +42,18 @@ const SurveyResponsesPage = () => {
         <div className="md:p-8 p-1">
             <div className='flex flex-col md:flex-row justify-between'>
             <h1 className="text-2xl mb-4">Survey Responses</h1>
-            <Button className='btn-primary' onClick={handleDownload}>Export as Excel</Button>
+            <Button className='btn-secondary' onClick={handleDownload}>Export as Excel</Button>
             </div>
             {responses.length > 0 ? (
                 <div className="space-y-4">
                     {responses.map((response) => (
-                        <Link key={response._id} href={`/view-customer-review/${response._id}`}>
-                            <div className="block p-4 border rounded hover:bg-gray-900">
-                                <h2 className="text-xl font-semibold">{response.answers.username}</h2>
-                                <div className='flex flex-row gap-3'>
+                        <Link key={response._id} href={`/view-customer-review/${response._id}`} className='cursor-pointer'>
+                            <div className=" p-4 border rounded hover:bg-gray-900 flex flex-col gap-1">
+                                <h3 className="text-xl font-semibold capitalize">{response.answers.username}</h3>
+                                <div className='flex flex-row gap-5'>
                                 <Image src="/location.png" alt='location' width={22} height={22} />
                                     
-                                <p>{response.answers.location}</p>
+                                <p className='capitalize'>{response.answers.location}</p>
                                 </div>
                                 <div className='flex flex-row gap-3'>
                                 <Image src="/calendar.svg" alt='calendar' width={22} height={22} />

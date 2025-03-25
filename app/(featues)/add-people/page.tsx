@@ -31,7 +31,6 @@ const CreateUserForm = () => {
 
     const onSubmit = async (data: UserFormInputs) => {
         setLoading(true);
-        console.log(data);
         try {
             const res = await fetch('https://survey-app-backend-h4ap.onrender.com/api/users/create', {
                 method: 'POST',

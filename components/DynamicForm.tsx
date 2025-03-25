@@ -25,8 +25,6 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
     }
 
     const onSubmit = async (data: FormData) => {
-        console.log("User Answers:", data);
-    
         try {
             const response = await fetch("https://survey-app-backend-h4ap.onrender.com/api/survey-responses", {
                 method: "POST",
@@ -58,27 +56,9 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
     // Default Questions:
     const defaultQuestions = [
         { id: "username", question: "User Name", type: "text", placeholder: "Enter your name" },
-        { id: "usertype", question: "Type of User (e.g., dealer)", type: "text", placeholder: "Dealer" },
-        { id: "businessname", question: "Business Name", type: "text" },
         { id: "location", question: "Location of Business", type: "text" },
         { id: "dob", question: "Date of Birth", type: "date" },
         { id: "status", question: "Status", type: "options", options: ["Married", "Unmarried"] },
-        {
-            id: "experience", question: "Years of Experience in Cement Business", type: "options",
-            options: ["Less than 1 year", "1-3 years", "4-7 years", "8+ years"]
-        },
-        {
-            id: "businesstype", question: "Business Type", type: "options",
-            options: ["Wholesale Dealer", "Retail Dealer", "Both Wholesale & Retail"]
-        },
-        {
-            id: "registered", question: "Is your dealership registered with a cement brand?", type: "options",
-            options: ["Yes", "No"]
-        },
-        {
-            id: "othermaterials", question: "Do you deal with other construction materials apart from cement?", type: "options",
-            options: ["Yes", "No"]
-        }
     ];
 
     return (
@@ -125,12 +105,12 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
             ))}
 
             {/* Dynamic Questions */}
-            {questions.map((q, idx) => (
+            {questions.map((q) => (
                 <div key={q.id} className="space-y-6 mb-2 border p-4 rounded-lg">
                     <label className="font-medium mb-3">{q.question}</label>
                     {q.type === "text" && (
                         <Controller
-                            name={`question_${idx}`}
+                            name={q.question}
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => <Input {...field} />}
@@ -138,7 +118,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     )}
                     {q.type === "date" && (
                         <Controller
-                            name={`question_${idx}`}
+                            name={q.question}
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => <Input type="date" {...field} />}
@@ -146,7 +126,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     )}
                     {q.type === "image" && (
                         <Controller
-                            name={`question_${idx}`}
+                            name={q.question}
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => <Input type="file" accept="image/*" {...field} />}
@@ -154,7 +134,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     )}
                     {q.type === "pdf" && (
                         <Controller
-                            name={`question_${idx}`}
+                            name={q.question}
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => <Input type="file" accept="application/pdf" {...field} />}
@@ -162,7 +142,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     )}
                     {q.type === "options" && (
                         <Controller
-                            name={`question_${idx}`}
+                            name={q.question}
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => (

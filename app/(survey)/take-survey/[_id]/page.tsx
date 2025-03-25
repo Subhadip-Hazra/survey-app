@@ -18,7 +18,6 @@ export default function FillSurvey() {
 
     const params = useParams();
     const { _id } = params;
-    console.log(_id);
 
     useEffect(() => {
         async function fetchSurvey() {

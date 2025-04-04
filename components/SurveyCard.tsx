@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
 import { LuClipboardCopy } from "react-icons/lu";
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface SurveyCardProps {
     _id: string;
@@ -35,6 +36,7 @@ const SurveyCard: React.FC<SurveyCardProps> = ({
     const [shareDialog, setShareDialog] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const surveyLink = `https://survey-app-h4ap.vercel.app/take-survey/${_id}`;
+    const router = useRouter();
 
     // Copy survey link to clipboard
     const copyOnClipboard = async () => {
@@ -58,7 +60,7 @@ const SurveyCard: React.FC<SurveyCardProps> = ({
                 throw new Error("Failed to delete survey");
             }
 
-            toast.success("Survey deleted successfully!");
+            router.push("/dashboard"); // Refresh the page to reflect changes
             setDeleteDialog(false);
             // Optionally, refresh the page or update the state to remove the deleted survey
         } catch (error) {

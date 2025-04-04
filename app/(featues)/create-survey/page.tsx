@@ -99,6 +99,7 @@ export default function CreateSurvey() {
                         question: q.question,
                         type: q.type,
                         options: q.options,
+                        
                     }))
                 }),
             });

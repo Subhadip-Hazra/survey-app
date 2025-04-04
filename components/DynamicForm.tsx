@@ -55,10 +55,10 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
 
     // Default Questions:
     const defaultQuestions = [
-        { id: "username", question: "User Name", type: "text", placeholder: "Enter your name" },
-        { id: "location", question: "Location of Business", type: "text" },
+        { id: "username", question: "Name", type: "text", placeholder: "Enter your name" },
+        { id: "location", question: "Location", type: "text" },
         { id: "dob", question: "Date of Birth", type: "date" },
-        { id: "status", question: "Status", type: "options", options: ["Married", "Unmarried"] },
+        { id: "status", question: "Relationship Status", type: "options", options: ["Married", "Unmarried"] },
     ];
 
     return (

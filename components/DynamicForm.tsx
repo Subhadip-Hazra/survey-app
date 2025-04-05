@@ -16,7 +16,7 @@ interface Question {
 }
 
 export default function DynamicForm({ questions }: { questions: Question[] }) {
-    const { handleSubmit, control, reset} = useForm();
+    const { handleSubmit, control, reset } = useForm();
     const { _id } = useParams();
     const router = useRouter();
 
@@ -32,11 +32,11 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    surveyId:_id,
+                    surveyId: _id,
                     answers: data
                 })
             });
-    
+
             if (response.ok) {
                 toast("Survey Submitted Successfully!");
                 reset();
@@ -51,7 +51,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
             console.error("Fetch Error:");
         }
     };
-    
+
 
     // Default Questions:
     const defaultQuestions = [
@@ -93,7 +93,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                                         <SelectValue placeholder="Select an option" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {q.options?.map((opt: string, id: number) => (
+                                        {q.options?.filter(opt => opt?.trim() !== "").map((opt: string, id: number) => (
                                             <SelectItem key={id} value={opt}>{opt}</SelectItem>
                                         ))}
                                     </SelectContent>
@@ -101,6 +101,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                             )}
                         />
                     )}
+
                 </div>
             ))}
 
@@ -151,7 +152,7 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                                         <SelectValue placeholder="Select an option" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {(q.options ?? []).map((opt: string, id: number) => (
+                                        {(q.options ?? []).filter(opt => opt?.trim() !== "").map((opt: string, id: number) => (
                                             <SelectItem key={id} value={opt}>{opt}</SelectItem>
                                         ))}
                                     </SelectContent>
@@ -161,7 +162,6 @@ export default function DynamicForm({ questions }: { questions: Question[] }) {
                     )}
                 </div>
             ))}
-
             <Button type="submit">Submit Survey</Button>
         </form>
     );
